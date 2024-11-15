@@ -1,0 +1,55 @@
+ .inputFrame{
+  background-color: white;
+  width: 300px;
+  height: 153px;
+  border-radius: 12px;
+  position: absolute;
+  top: 230px;
+  left: 21.5px;
+  padding: 20px 0 0 0
+ }
+ 
+ .textfield .MuiOutlinedInput-root {
+  background-color: white;
+  width: 120px;
+}
+
+.custom-dropdown .MuiAutocomplete-inputRoot {
+  background-color: white;
+  padding-top: 30px;
+  width: 200px;
+}
+
+.textfield-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  gap: 16px; /* Adjust the gap as needed */
+}
+
+
+
+.gameTitle {
+  padding-top: 70px;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.subTitle {
+  font-size: 13px;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.autocomplete-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+  
+.inputFrame .btn{
+  position: relative;
+  top: 40px;
+}

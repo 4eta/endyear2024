@@ -1,0 +1,51 @@
+  .title {
+    font-weight: 700;
+    font-size: 16px;
+    position: relative;
+    left: 33px;
+  }
+
+  .notation {
+    font-size: 11px;
+  }
+
+  .emphasize{
+    color: #fdb843;
+    font-weight: 700;
+  }
+
+  .explanation{
+    background-color: #501aa9; /* 色: #131313, 透明度: 57% */
+    width: 343px;
+    height: 265px;
+    border-radius: 12px; /* 角の丸み */
+    position: absolute;
+    z-index: 1;
+    top: 105px;
+    left: 16px;
+    font-size: 13px;
+    font-weight: 400;
+  }
+  
+  .explanation p{
+    margin-left: 15px;
+  }
+
+  .enjoyPoint {
+    background-color: white;
+    color: black;
+    width: 343px;
+    height: 193px;
+    position: absolute;
+    top: 346px;
+    left: 16px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .enjoyPoint p{
+    position: relative;
+    top: 25px;
+    left: 20px;
+  }
