@@ -10,11 +10,13 @@ import QResultDetailModal from '../elements/QResultDetailModal';
 import PleaseWaitModal from '../elements/PleaseWaitModal';
 import QuestionList from '../templates/QuestionList';
 import { useToNextQuestion } from '../hooks/useToNextQuestion';
+import { useCalculateAnswer } from '../hooks/useCalculateAnswer';
 
 const QResult = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toNextQuestion } = useToNextQuestion();
+  const { calculateAnswer } = useCalculateAnswer();
   const { question_id, answerState, userState, resultList } = location.state;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -78,8 +80,24 @@ const QResult = () => {
           },
         }
       );
-    } else {
+    } else if (status % 100 === 2 && Math.floor(status / 100) === question_id) {
       setIsPWModalOpen(true);
+    } else {
+      calculateAnswer(
+        Math.floor(status / 100),
+        {
+          user_id: answerState.user_id,
+          question_id: Math.floor(status / 100),
+          content: null,
+          answer_id: null,
+          score: null,
+          rank: null,
+          num: null,
+          idx: 0,
+        },
+        userState,
+        null
+      );
     }
   };
 
@@ -91,7 +109,7 @@ const QResult = () => {
   return (
     <div className="background">
       <Header user={userState} />
-      
+
       <div className="qFrameResult">
         <p className="qTitleResult">Q{question_id} {QuestionList[question_id].QTitle}</p>
       </div>
@@ -175,7 +193,7 @@ const QResult = () => {
                     ))}
                   </tbody>
                 </table>
-              :
+                :
                 <table>
                   <tbody>
                     {resultList.slice(index).map((result, index) => (

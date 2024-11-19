@@ -4,9 +4,16 @@ import DepartmentList from '../templates/DepartmentList';
 
 const HeaderUserIcon = ({ user }) => {
   const bxdColor = DepartmentList.find(department => department.label === user.department)?.color;
+  const lastName = user.last_name || '';
+  const firstName = user.first_name || '';
+  const fullName = lastName + firstName;
+  const displayName = fullName.length <= 4 ? fullName : fullName.slice(0, 4);
+
   return (
-    <div className="userIcon" style={{backgroundColor:bxdColor}}>
-      <p className="userIconName">{user.last_name}{user.first_name}</p>
+    <div className="userIcon" style={{ backgroundColor: bxdColor }}>
+      <p className="userIconName">
+        {displayName}
+      </p>
       <p className="userIconDepartment">{user.department}</p>
     </div>
   );
