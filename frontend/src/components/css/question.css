@@ -1,16 +1,16 @@
-.qFrame{
+.qFrame {
     background-color: white;
     width: 343px;
     height: 204px;
     border-radius: 12px 12px 0 0;
     position: absolute;
     top: 100px;
-    left: 16px;
+    left: calc(50% - 171.5px);
     color: black;
     transition: height 0.4s ease, border-radius 0.4s ease;
 }
 
-.qFrame.inputMode{
+.qFrame.inputMode {
     height: 112px;
     border-radius: 12px;
 }
@@ -23,7 +23,7 @@
     text-align: center;
 }
 
-.qLine{
+.qLine {
     background-color: #d9d9d9;
     width: 343px;
     height: 1px;
@@ -32,7 +32,7 @@
     text-align: center;
 }
 
-.qTitle{
+.qTitle {
     font-size: 30px;
     font-weight: 700;
     position: relative;
@@ -41,11 +41,11 @@
     transition: top 0.4s ease;
 }
 
-.qFrame.inputMode .qTitle{
+.qFrame.inputMode .qTitle {
     top: -30px;
 }
 
-.ansNumber{
+.ansNumber {
     font-size: 10px;
     position: relative;
     top: -9px;
@@ -53,16 +53,16 @@
     transition: opacity 0.4s ease, top 0.4s ease;
 }
 
-.ansNumber span{
+.ansNumber span {
     font-size: 16px;
 }
 
-.qFrame.inputMode .ansNumber{
+.qFrame.inputMode .ansNumber {
     top: -70px;
     opacity: 0;
 }
 
-.explainFrame{
+.explainFrame {
     background-color: #501aa9;
     width: 343px;
     height: 155px;
@@ -71,45 +71,47 @@
     font-weight: 400;
     position: absolute;
     top: 304px;
-    left: 16px;
+    left: calc(50% - 171.5px);
     transition: opacity 0.4s ease, top 0.4s ease;
 }
 
-.explainFrame p{
+.explainFrame p {
     position: relative;
     top: 4px;
     left: 20px;
 }
 
-.explainFrame .ansExample{
+.explainFrame .ansExample {
     font-weight: 700;
 }
 
-.explainFrame span{
+.explainFrame span {
     font-size: 16px;
 }
 
-.explainFrame.inputMode{
+.explainFrame.inputMode {
     top: 212px;
     opacity: 0;
 }
 
-.ansBlur{
-    background-color: rgba(19, 19, 19, 0.57); /* 色: #131313, 透明度: 57% */
+.ansBlur {
+    background-color: rgba(19, 19, 19, 0.57);
+    /* 色: #131313, 透明度: 57% */
     width: 343px;
     height: 116px;
-    border-radius: 12px; /* 角の丸み */
+    border-radius: 12px;
+    /* 角の丸み */
     position: absolute;
     top: 470px;
-    left: 16px;
+    left: calc(50% - 171.5px);
     transition: top 0.4s ease, height 0.9s ease;
 }
 
-.ansBlur.inputMode{
+.ansBlur.inputMode {
     top: 223px;
 }
 
-.ansBlur.valid{
+.ansBlur.valid {
     height: 156px;
 }
 
@@ -129,22 +131,24 @@
     -moz-appearance: none;
 }
 
-.ansInputForm:hover{
+.ansInputForm:hover {
     outline: 0;
     box-shadow: 0 0 0 2px #aaaaaa inset;
 }
 
-.ansInputForm:focus{
+.ansInputForm:focus {
     outline: 0;
     box-shadow: 0 0 0 2px rgb(33, 150, 243) inset;
 }
 
 .ansInputForm::placeholder {
-    color: #d9d9d9; /* Placeholder text color */
-    font-weight: 400; /* Placeholder text weight */
-  }
+    color: #d9d9d9;
+    /* Placeholder text color */
+    font-weight: 400;
+    /* Placeholder text weight */
+}
 
-  .ansButton {
+.ansButton {
     background-color: #3bb9c1;
     width: 32px;
     height: 32px;
@@ -153,33 +157,33 @@
     top: -12px;
     left: 250px;
     transition: background-color 0.2s ease;
-  }
-  
-  .ansButton img {
+}
+
+.ansButton img {
     width: 20px;
     background-color: transparent;
     position: relative;
     top: 6px;
     left: 6px;
     transition: transform 0.6s ease;
-  }
-  
-  .ansBlur.valid .ansButton img {
+}
+
+.ansBlur.valid .ansButton img {
     transition: transform 0.9s ease;
     transform: rotate(90deg);
-  }
-  
-  .ansBlur.valid .ansButton {
+}
+
+.ansBlur.valid .ansButton {
     background-color: #aaaaaa;
     transition: background-color 0.9s ease;
-  }
-  
-  .ansButton:active {
-    background-color: #217075;
-  }
-  
+}
 
-  .validationMessage{
+.ansButton:active {
+    background-color: #217075;
+}
+
+
+.validationMessage {
     opacity: 0;
 
     background-color: #BF0000;
@@ -191,23 +195,22 @@
     left: 103px;
     text-align: center;
     transition: opacity 0.4s ease;
-  }
+}
 
-  .validationMessage.alert{
+.validationMessage.alert {
     opacity: 1;
-  }
+}
 
-  .ansBlur .btn {
+.ansBlur .btn {
     opacity: 0;
     position: relative;
     top: -80px;
     transition: opacity 0.9s ease, top 0.9s ease;
-    pointer-events: none; 
-  }
-  
-  .ansBlur.valid .btn {
+    pointer-events: none;
+}
+
+.ansBlur.valid .btn {
     opacity: 1;
     top: -45px;
     pointer-events: auto;
-  }
-  
+}

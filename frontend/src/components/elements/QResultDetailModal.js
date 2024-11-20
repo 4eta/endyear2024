@@ -38,7 +38,7 @@ const QResultDetailModal = ({ num, userState, answerState, resultList, onClose }
                 result && result.length > 0 && (
                   <tr key={index}>
                     <td>
-                      <ResultItem 
+                      <ResultItem
                         answerList={result} isMine={result[0].content === answerState.content}
                       />
                     </td>
@@ -49,17 +49,17 @@ const QResultDetailModal = ({ num, userState, answerState, resultList, onClose }
           </table>
         </div>
         <div className="backButton">
-          <img 
-            src={`${process.env.PUBLIC_URL}/batsu.svg`} 
-            className="batsuIcon" 
-            alt="batsu" 
+          <img
+            src={`${process.env.PUBLIC_URL}/batsu.svg`}
+            className="batsuIcon"
+            alt="batsu"
             onClick={handleCloseModal}
           />
         </div>
       </div>
       {isModalOpen && (
         <div className="modalOverlay" onClick={handleOutsideClick}>
-          <ResultModal onClose={handleCloseModal} num={answerState.num} answerList={resultList[answerState.idx]}/>
+          <ResultModal onClose={handleCloseModal} num={answerState.num} answerList={resultList[answerState.idx]} />
         </div>
       )}
     </div>

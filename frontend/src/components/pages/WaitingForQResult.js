@@ -74,7 +74,7 @@ const WaitingForQResult = () => {
     <div className="background">
       <Header user={userState} />
 
-      <div className="blur" style={{ height: '78px', top: '105px', left: '16px', position: 'absolute' }}>
+      <div className="blur" style={{ height: '78px', top: '105px', position: 'absolute' }}>
         <button
           type="submit"
           className="btn"

@@ -1,49 +1,49 @@
-.headerBlur{
+.headerBlur {
   background-color: rgba(19, 19, 19, 0.57);
-  width: 375px;
+  width: 100%;
   height: 86px;
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 0;
+  left: 0;
 }
 
 .header {
-    background-color: #501aa9;
-    width: 343px;
-    height: 59px;
-    border-radius: 29.5px;
-    position: absolute;
-    top: 15px;
-    left: 16px;
-  }
-  
-  .header .userIcon{
-    width: 50px;
-    height: 50px;
-    border-radius: 25px;
-    position: absolute;
-    top: 3.5px;
-    left: 4.7px;
-    border: 1px solid #FFFFFF;
-  }
-  
-  .scores{
-    font-size: 12px;
-    font-weight: 400;
-    position: absolute;
-    top: 5px;
-    right: 15px;
-  }
-  
-  .userIconName{
-    font-size:11px;
-    text-align: center;
-    margin-top: 15px;
-  }
-  
-  .userIconDepartment{
-    font-size:7px;
-    text-align: center;
-    position: relative;
-    top: -10px;
-  }
+  background-color: #501aa9;
+  width: calc(100% - 32px);
+  height: 59px;
+  border-radius: 29.5px;
+  position: absolute;
+  top: 15px;
+  left: 16px;
+}
+
+.header .userIcon {
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  position: absolute;
+  top: 3.5px;
+  left: 4.7px;
+  border: 1px solid #FFFFFF;
+}
+
+.scores {
+  font-size: 12px;
+  font-weight: 400;
+  position: absolute;
+  top: 5px;
+  right: 15px;
+}
+
+.userIconName {
+  font-size: 11px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.userIconDepartment {
+  font-size: 7px;
+  text-align: center;
+  position: relative;
+  top: -10px;
+}

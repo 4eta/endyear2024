@@ -112,8 +112,11 @@ const QResult = () => {
 
       <div className="qFrameResult">
         <p className="qTitleResult">Q{question_id} {QuestionList[question_id].QTitle}</p>
+        <div className="nextButton" onClick={handleSubmit}>
+          <img src={`${process.env.PUBLIC_URL}/arrowrightwhite.png`} className="nextIcon" alt="Arrow Right" />
+        </div>
       </div>
-      <div className="myResultFrame" onClick={handleMyFrameClick}>
+      <div className="myResultFrame" onClick={answerState.content !== null ? handleMyFrameClick : null}>
         <table>
           <tbody>
             <tr>
@@ -152,7 +155,7 @@ const QResult = () => {
         </div>
       </div>
       <div className="blurResultFrame">
-        <div className="resultList">
+        <div className="resultListSummary">
           {(() => {
             let index = 0;
             for (; index < resultList.length; index++) {
@@ -212,9 +215,6 @@ const QResult = () => {
             );
           })()}
         </div>
-      </div>
-      <div className="nextButton" onClick={handleSubmit}>
-        <img src={`${process.env.PUBLIC_URL}/arrowrightwhite.png`} className="nextIcon" alt="Arrow Right" />
       </div>
       {isModalOpen && (
         <div className="modalOverlay" onClick={handleOutsideClick}>

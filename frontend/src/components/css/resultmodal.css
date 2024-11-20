@@ -1,4 +1,4 @@
-.resultModal{
+.resultModal {
     width: 343px;
     color: black;
     height: 20px;
@@ -15,7 +15,7 @@
     border-radius: 12px 12px 0 0;
 }
 
-.resultUserFrameModal{
+.resultUserFrameModal {
     position: relative;
     background-color: #501AA9;
     width: 343px;
@@ -23,12 +23,12 @@
     border-radius: 0 0 12px 12px;
 }
 
-.resultFrameModal table{
+.resultFrameModal table {
     border-collapse: collapse;
     width: 343px;
 }
 
-.resultFrameModal table td{
+.resultFrameModal table td {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -36,7 +36,7 @@
     padding-top: 6px;
 }
 
-.rankModal{
+.rankModal {
     font-size: 12px;
     font-weight: 400;
     text-align: right;
@@ -45,13 +45,13 @@
     top: 2px;
 }
 
-.answerModal{
+.answerModal {
     font-size: 20px;
     font-weight: 900;
     text-align: center;
 }
 
-.pointModal{
+.pointModal {
     font-size: 10px;
     font-weight: 400;
     text-align: right;
@@ -60,7 +60,7 @@
     top: 2px;
 }
 
-.answerUser{
+.answerUser {
     color: white;
     font-size: 10px;
     font-weight: 400;
@@ -72,18 +72,17 @@
     height: 20px;
 }
 
-.answerUserList table{
+.answerUserList table {
     position: relative;
     top: 24px;
     left: 39px;
     border-collapse: collapse;
 }
 
-.answerUserList table td{
+.answerUserList table td {
     margin: 0;
     box-sizing: border-box;
     width: 55px;
     padding: 6px 0;
     text-align: center;
 }
-

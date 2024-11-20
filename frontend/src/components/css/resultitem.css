@@ -1,4 +1,4 @@
-.resultItemFrame{
+.resultItemFrame {
     background-color: white;
     width: 315px;
     height: 46px;
@@ -6,15 +6,15 @@
     transition: background-color 0.3s ease;
 }
 
-.resultItemFrame:active{
+.resultItemFrame:active {
     background-color: #d9d9d9;
 }
 
-.resultItemFrame table{
+.resultItemFrame table {
     border-collapse: collapse;
     width: 315px;
     height: 46px;
-    border: 0; 
+    border: 0;
 }
 
 .resultItemFrame table td {
@@ -23,7 +23,7 @@
     box-sizing: border-box;
 }
 
-.resultNumFrame{
+.resultNumFrame {
     background: linear-gradient(to bottom, red, blue);
     width: 60px;
     height: 46px;
@@ -31,7 +31,7 @@
     position: relative;
 }
 
-.onlyOneCrown img{
+.onlyOneCrown img {
     width: 10px;
     height: 12px;
     position: relative;
@@ -39,7 +39,7 @@
     left: 10px;
 }
 
-.resultNum{
+.resultNum {
     color: white;
     font-size: 11px;
     font-weight: 400;
@@ -50,7 +50,7 @@
     width: 50px;
 }
 
-.answerWord{
+.answerWord {
     color: black;
     font-size: 16px;
     font-weight: 900;
@@ -59,13 +59,13 @@
     width: 150px;
 }
 
-.onlyOneItem{
+.onlyOneItem {
     position: relative;
     left: 10px;
     width: 50px;
 }
 
-.answerPoint{
+.answerPoint {
     color: black;
     font-size: 10px;
     font-weight: 400;

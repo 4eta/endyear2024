@@ -4,51 +4,53 @@ body {
   font-family: 'Noto Sans JP', sans-serif;
   color: white;
   font-weight: 700;
+  overflow: hidden;
 }
 
 .background {
-    background-image: url('../../../public/backgroundimage.jpg');
-    background-size: cover;
-    background-position: center;
-    width: 375px;
-    height: 667px;
+  background-image: url('../../../public/backgroundimage.jpg');
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .blur {
-  background-color: rgba(19, 19, 19, 0.57); /* 色: #131313, 透明度: 57% */
+  background-color: rgba(19, 19, 19, 0.57);
   width: 343px;
   height: 545px;
-  border-radius: 12px; /* 角の丸み */
+  border-radius: 12px;
   position: absolute;
   top: 62px;
-  left: 16px;
+  left: calc(50% - 171.5px);
 }
 
 .btn {
-    display: flex;
-    justify-content: center;
-    text-align: center;
-    vertical-align: middle;
-    text-decoration: none;
-    width: 159px;
-    height: 40px;
-    margin: 20px auto 0 auto;
-    padding: 0;
-    font-weight: bold;
-    border-radius: 12px;
-    border: none; /* 上部と左右の縁を消す */
-    border-bottom: 2px solid #bebebe; /* 下部の縁を残す */
-    background: #3bb9c1;
-    color: #fff;
-    font-size: 16px;
-    font-family: 'Noto Sans JP', sans-serif;
-    font-weight: 700;
-    line-height: 40px;
-    transition: border-bottom, background 0.1s ease;
-  }
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  text-decoration: none;
+  width: 159px;
+  height: 40px;
+  margin: 20px auto 0 auto;
+  padding: 0;
+  font-weight: bold;
+  border-radius: 12px;
+  border: none;
+  border-bottom: 2px solid #bebebe;
+  background: #3bb9c1;
+  color: #fff;
+  font-size: 16px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 700;
+  line-height: 40px;
+  transition: border-bottom, background 0.1s ease;
+}
+
 .btn:active {
-	margin-top: 21px;
-  border-bottom: 0px solid #bebebe; /* 下部の縁を消す */
+  margin-top: 21px;
+  border-bottom: 0px solid #bebebe;
   background: #2b9198;
-	color: #fff;
+  color: #fff;
 }

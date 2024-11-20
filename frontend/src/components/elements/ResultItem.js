@@ -36,8 +36,8 @@ const ResultItem = ({ answerList, isMine }) => {
               <td style={{ width: '60px', height: '46px' }}>
                 <div className="resultNumFrame" style={isMine ? { background: '#3bb9c1' } : answerList[0].user_id === null ? { background: '#bbbbbb' } : {}}>
                   <div className="onlyOneCrown">
-                    <img 
-                      src={`${process.env.PUBLIC_URL}/crown.png`} 
+                    <img
+                      src={`${process.env.PUBLIC_URL}/crown.png`}
                       alt="Crown"
                       style={{ visibility: answerList[0].user_id !== null && answerList.length === 1 ? 'visible' : 'hidden' }}
                     />
