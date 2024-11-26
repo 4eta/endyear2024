@@ -1,10 +1,8 @@
 .resultModal {
     width: 343px;
     color: black;
-    height: 20px;
     position: absolute;
     top: 159px;
-    left: 16px;
 }
 
 .resultFrameModal {

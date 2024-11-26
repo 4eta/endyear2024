@@ -11,12 +11,14 @@ import PleaseWaitModal from '../elements/PleaseWaitModal';
 import QuestionList from '../templates/QuestionList';
 import { useToNextQuestion } from '../hooks/useToNextQuestion';
 import { useCalculateAnswer } from '../hooks/useCalculateAnswer';
+import { useToReviewResults } from '../hooks/useToReviewResults';
 
 const QResult = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { toNextQuestion } = useToNextQuestion();
   const { calculateAnswer } = useCalculateAnswer();
+  const { toReviewResults } = useToReviewResults();
   const { question_id, answerState, userState, resultList } = location.state;
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -82,6 +84,8 @@ const QResult = () => {
       );
     } else if (status % 100 === 2 && Math.floor(status / 100) === question_id) {
       setIsPWModalOpen(true);
+    } else if (status % 100 === 3) {
+      toReviewResults(question_id, answerState, userState, resultList);
     } else {
       calculateAnswer(
         Math.floor(status / 100),

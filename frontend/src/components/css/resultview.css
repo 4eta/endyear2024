@@ -1,0 +1,29 @@
+.toFormerQ {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 47px;
+    width: 78px;
+    border-radius: 12px 0 0 0;
+    background-color: rgb(241, 241, 241);
+    transition: background-color 0.3s ease;
+}
+
+.toFormerQ:active {
+    background-color: rgb(200, 200, 200);
+}
+
+.toNextQ {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    height: 47px;
+    width: 78px;
+    border-radius: 0 12px 0 0;
+    background-color: rgb(241, 241, 241);
+    transition: background-color 0.3s ease;
+}
+
+.toNextQ:active {
+    background-color: rgb(200, 200, 200);
+}

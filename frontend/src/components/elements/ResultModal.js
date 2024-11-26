@@ -1,5 +1,4 @@
 import React from 'react';
-import '../css/resultitem.css';
 import '../css/resultmodal.css';
 import UserIcon from './UserIcon';
 
@@ -19,7 +18,7 @@ const ResultModal = ({ num, answerList }) => {
   const frameHeight = 124 + (rows.length - 1) * 55;
 
   return (
-    <div className="resultModal" style={{background: 'transparent', height: '100px'}}>
+    <div className="resultModal" style={{ background: 'transparent', height: '100px', left: 'calc(50% - 171.5px)' }}>
       <div className="resultFrameModal">
         <table>
           <tr>

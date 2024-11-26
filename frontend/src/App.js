@@ -5,6 +5,7 @@ import WaitingForQAsk from './components/pages/WaitingForQAsk';
 import QAsk from './components/pages/QAsk';
 import WaitingForQResult from './components/pages/WaitingForQResult';
 import QResult from './components/pages/QResult';
+import ReviewResults from './components/pages/ReviewResults';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/QAsk" element={<QAsk />} />
         <Route path="/WaitingForQResult" element={<WaitingForQResult />} />
         <Route path="/QResult" element={<QResult />} />
+        <Route path="/ReviewResults" element={<ReviewResults />} />
       </Routes>
     </div>
   );
