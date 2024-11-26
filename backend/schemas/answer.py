@@ -24,6 +24,7 @@ class AnswerDetail(Answer):
     last_name: str
     first_name: str
     department: str
+    is_admin: bool
 
     class Config:
         orm_mode = True

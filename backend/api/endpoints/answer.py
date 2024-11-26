@@ -105,6 +105,7 @@ def read_answer_by_question_id(question_id: int, db: Session = Depends(get_db)):
         - User's last name
         - User's first name
         - User's department
+        - User's is_admin
 
     Notes:
     - Returns empty list if no answers found

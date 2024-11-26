@@ -44,6 +44,7 @@ def read_by_question_id(db: Session, question_id: int):
             models.User.last_name,
             models.User.first_name,
             models.User.department,
+            models.User.is_admin,
             models.Answer.answer_id,
             models.Answer.question_id,
             models.Answer.content,
