@@ -61,6 +61,8 @@ def update_scores(db: Session, question_id: int):
         user = (
             db.query(models.User).filter(models.User.user_id == answer.user_id).first()
         )
+        if user.is_admin:
+            continue
         user.total_score += answer.score
     db.commit()
     # 更新されたuserを返す

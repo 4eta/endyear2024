@@ -48,6 +48,27 @@ def create_answer(answer: AnswerCreate, db: Session = Depends(get_db)):
     return crud.create_answer(db=db, answer=answer)
 
 
+@router.get("/answer/pair/all")
+def get_best_pairs(db: Session = Depends(get_db)):
+    """
+    Get the best answer pairs.
+
+    Returns:
+    - **List[AnswerDetail]**: List of best answer pairs for each question
+    """
+    best_pairs = crud.get_best_pairs(db)
+    results = []
+    for pair in best_pairs:
+        ans_pair0 = crud.read_by_user_id(db, pair[0].user_id)
+        ans_pair1 = crud.read_by_user_id(db, pair[1].user_id)
+        tmp = []
+        ans_pair0_content = [ans.content for ans in ans_pair0]
+        ans_pair1_content = [ans.content for ans in ans_pair1]
+        tmp = [ans_pair0_content, ans_pair1_content]
+        results.append(tmp)
+    return [best_pairs, results]
+
+
 @router.get("/answer/{answer_id}", response_model=Answer)
 def read_answer_by_answer_id(answer_id: int, db: Session = Depends(get_db)):
     """

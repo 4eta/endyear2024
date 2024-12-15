@@ -20,35 +20,41 @@ export const useCalculateAnswer = () => {
 
           console.log("回答集計処理");
 
+          let answer_id = null;
+          let content = null;
           let score = null;
           let rank = null;
-          let num = 0; 
+          let num = 0;
           let resultList = [];
           let tmp = [res.data[0]];
           let idxtmp = 0;
           let idx = 0;
 
-          if (res.data[0].content === answerState.content) {
-              score = res.data[0].score;
-              rank = res.data[0].rank;
-              num++; 
-              idx = idxtmp;
+          if (res.data[0].user_id === userState.user_id) {
+            answer_id = res.data[0].answer_id;
+            content = res.data[0].content;
+            score = res.data[0].score;
+            rank = res.data[0].rank;
+            num++;
+            idx = idxtmp;
           }
 
           for (let i = 1; i < res.data.length; i++) {
-              if (res.data[i].content === tmp[0].content) {
-                  tmp.push(res.data[i]);
-              } else {
-                  resultList.push(tmp);
-                  tmp = [res.data[i]];
-                  idxtmp++;
-              }
-              if (res.data[i].content === answerState.content) {
-                  score = res.data[i].score;
-                  rank = res.data[i].rank;
-                  num++; 
-                  idx = idxtmp;
-              }
+            if (res.data[i].content === tmp[0].content) {
+              tmp.push(res.data[i]);
+            } else {
+              resultList.push(tmp);
+              tmp = [res.data[i]];
+              idxtmp++;
+            }
+            if (res.data[i].user_id === userState.user_id) {
+              answer_id = res.data[i].answer_id;
+              content = res.data[i].content;
+              score = res.data[i].score;
+              rank = res.data[i].rank;
+              num++;
+              idx = idxtmp;
+            }
           }
           resultList.push(tmp);
 
@@ -86,23 +92,23 @@ export const useCalculateAnswer = () => {
               console.log(`TotalScore: ${userRes.data.total_score}, Rank: ${userRes.data.rank}`);
 
               navigate(
-                "/QResult", 
-                { 
+                "/QResult",
+                {
                   state: {
                     question_id: question_id,
-                    answerState: { 
+                    answerState: {
                       user_id: answerState.user_id,
                       question_id: answerState.question_id,
-                      content: answerState.content,
-                      answer_id: answerState.answer_id,
+                      content: content,
+                      answer_id: answer_id,
                       score: score,
-                      rank: rank, 
+                      rank: rank,
                       num: num,
                       idx: idx + zeroAnswerNum
                     },
                     userState: userRes.data,
                     resultList: resultList
-                  }  
+                  }
                 }
               );
 
@@ -121,7 +127,7 @@ export const useCalculateAnswer = () => {
                     answerState: answerState,
                     userState: userState,
                     resultList: resultList
-                  }  
+                  }
                 }
               );
               reject(err);
@@ -140,7 +146,7 @@ export const useCalculateAnswer = () => {
                 answerState: answerState,
                 userState: userState,
                 resultList: resultList
-              }  
+              }
             }
           );
           reject(err);

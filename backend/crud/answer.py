@@ -1,4 +1,4 @@
-from collections import Counter
+from collections import Counter, defaultdict
 
 from sqlalchemy.orm import Session
 
@@ -58,6 +58,44 @@ def read_by_question_id(db: Session, question_id: int):
     )
 
 
+def get_best_pairs(db: Session):
+    dp = [[0] * 300 for _ in range(300)]
+    # 全てのAnswerを取得
+    for question_id in range(6):
+        answers = (
+            db.query(models.Answer)
+            .filter(models.Answer.question_id == question_id)
+            .all()
+        )
+        d = defaultdict(list)
+        for answer in answers:
+            d[answer.content].append(answer.user_id)
+        for arr in d.values():
+            for i in range(len(arr)):
+                for j in range(i + 1, len(arr)):
+                    dp[arr[i]][arr[j]] += 1
+                    dp[arr[j]][arr[i]] += 1
+    max_cnt = 0
+    for i in range(300):
+        for j in range(i + 1, 300):
+            if dp[i][j] > max_cnt:
+                max_cnt = dp[i][j]
+
+    best_pairs = []
+    for i in range(300):
+        for j in range(i + 1, 300):
+            if dp[i][j] == max_cnt:
+                best_pairs.append((i, j))
+
+    best_pairs_user = []
+    for pair in best_pairs:
+        user1 = db.query(models.User).filter(models.User.user_id == pair[0]).first()
+        user2 = db.query(models.User).filter(models.User.user_id == pair[1]).first()
+        best_pairs_user.append((user1, user2))
+
+    return best_pairs_user
+
+
 def read_all(db: Session):
     # 全てのAnswerを取得
     return db.query(models.Answer).all()
@@ -70,11 +108,35 @@ def update_scores(db: Session, question_id: int):
     answers = (
         db.query(models.Answer).filter(models.Answer.question_id == question_id).all()
     )
+    answers_detail = (
+        db.query(
+            models.Answer,
+            models.Answer.user_id,
+            models.User.last_name,
+            models.User.first_name,
+            models.User.department,
+            models.User.is_admin,
+            models.Answer.answer_id,
+            models.Answer.question_id,
+            models.Answer.content,
+            models.Answer.score,
+            models.Answer.rank,
+        )
+        .join(models.User, models.Answer.user_id == models.User.user_id)
+        .filter(models.Answer.question_id == question_id)
+    )
+    # 各answer/contentごとに、is_adminがTrueのユーザーが存在するか辞書で保持
+    with_admin = defaultdict(bool)
+    for answer in answers_detail:
+        with_admin[answer.content] = with_admin[answer.content] or answer.is_admin
     # 各answerについて、スコアを計算
     # scoreは100//(回答の重複数)で設定
     d = Counter([answer.content for answer in answers])
+    weights = [100, 120, 140, 160, 180, 200]
     for answer in answers:
-        score = 100 // d[answer.content]
+        score = weights[question_id] // d[answer.content]
+        if with_admin[answer.content]:
+            score += weights[question_id] // 4
         answer.score = score
     db.commit()
     return answers

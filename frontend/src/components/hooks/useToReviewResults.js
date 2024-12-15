@@ -13,7 +13,9 @@ export const useToReviewResults = () => {
             console.log("回答履歴取得処理");
 
             const resultLists = [];
+            const resultListsSorted = [];
             const answerStates = [];
+            const answerStatesSorted = [];
             const promises = [];
 
             for (let id = 0; id <= 5; id++) {
@@ -88,6 +90,7 @@ export const useToReviewResults = () => {
                             num: num,
                             idx: idx + zeroAnswerNum
                         });
+
                     })
                     .catch((err) => {
                         console.log("回答履歴取得処理に失敗しました。", err);
@@ -99,14 +102,31 @@ export const useToReviewResults = () => {
 
             Promise.all(promises).then(() => {
                 console.log("ReviewResultsへ遷移");
+                // resultListsをソートする
+                for (let q = 0; q < resultLists.length; q++) {
+                    for (let i = 0; i < resultLists.length; i++) {
+                        if (resultLists[i][0][0].question_id === q) {
+                            resultListsSorted.push(resultLists[i]);
+                        }
+                    }
+                }
+
+                // answerStatesをソートする
+                for (let q = 0; q < answerStates.length; q++) {
+                    for (let i = 0; i < answerStates.length; i++) {
+                        if (answerStates[i].question_id === q) {
+                            answerStatesSorted.push(answerStates[i]);
+                        }
+                    }
+                }
                 navigate(
                     "/ReviewResults",
                     {
                         state: {
                             question_id: question_id,
-                            answerStates: answerStates,
+                            answerStates: answerStatesSorted,
                             userState: userState,
-                            resultLists: resultLists
+                            resultLists: resultListsSorted
                         }
                     }
                 );

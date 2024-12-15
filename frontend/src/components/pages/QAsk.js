@@ -27,7 +27,7 @@ const QAsk = () => {
 
     if (answer.trim() === '') {
       setAnsStatus(-1);
-    } else if (AnswerList[question_id].includes(answer)) {
+    } else if (AnswerList[question_id].some(ans => ans.toLowerCase() === answer.toLowerCase())) {
       setAnsStatus(1);
     } else {
       setAnsStatus(0);
@@ -46,37 +46,43 @@ const QAsk = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const status = await toWaitingForQResult();
-    if (status % 100 === 1 && Math.floor(status / 100) === question_id) {
-      submitAnswer(question_id, answer, answerState, userState);
-    } else if (status % 100 === 1) {
-      navigate(
-        '/QAsk',
-        {
-          state: {
-            answerState: answerState,
-            userState: userState,
+    const matchedAnswer = AnswerList[question_id].find(ans => ans.toLowerCase() === answer.toLowerCase());
+    if (matchedAnswer) {
+      const status = await toWaitingForQResult();
+      if (status % 100 === 1 && Math.floor(status / 100) === question_id) {
+        submitAnswer(question_id, matchedAnswer, answerState, userState);
+      } else if (status % 100 === 1) {
+        navigate(
+          '/QAsk',
+          {
+            state: {
+              answerState: answerState,
+              userState: userState,
+              question_id: Math.floor(status / 100),
+            },
+          }
+        );
+      } else {
+        calculateAnswer(
+          Math.floor(status / 100),
+          {
+            user_id: answerState.user_id,
             question_id: Math.floor(status / 100),
+            content: null,
+            answer_id: null,
+            score: null,
+            rank: null,
+            num: null,
+            idx: 0,
           },
-        }
-      );
+          userState,
+          null
+        )
+      }
     } else {
-      calculateAnswer(
-        Math.floor(status / 100),
-        {
-          user_id: answerState.user_id,
-          question_id: Math.floor(status / 100),
-          content: null,
-          answer_id: null,
-          score: null,
-          rank: null,
-          num: null,
-          idx: 0,
-        },
-        userState,
-        null
-      )
+      setAnsStatus(0);
     }
+
   };
 
   const handleKeyPress = (event) => {
@@ -95,6 +101,7 @@ const QAsk = () => {
   console.log("QAsk.js");
   console.log("answerState", answerState);
   console.log("userState", userState);
+
 
   return (
     <div className="background">

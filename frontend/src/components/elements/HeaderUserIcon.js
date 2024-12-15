@@ -7,7 +7,7 @@ const HeaderUserIcon = ({ user }) => {
   const lastName = user.last_name || '';
   const firstName = user.first_name || '';
   const fullName = lastName + firstName;
-  const displayName = fullName.length <= 4 ? fullName : fullName.slice(0, 4);
+  const displayName = fullName.length <= 4 ? fullName : lastName.slice(0, 2) + firstName.slice(0, 2);
 
   return (
     <div className="userIcon" style={{ backgroundColor: bxdColor }}>

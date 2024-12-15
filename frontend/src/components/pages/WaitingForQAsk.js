@@ -6,10 +6,12 @@ import Header from '../elements/Header';
 import PleaseWaitModal from '../elements/PleaseWaitModal';
 import { useToQAsk } from '../hooks/useToQAsk';
 import { useCalculateAnswer } from '../hooks/useCalculateAnswer';
+import { useToReviewResults } from '../hooks/useToReviewResults';
 
 const WaitingForQAsk = () => {
   const { toQAsk } = useToQAsk();
   const { calculateAnswer } = useCalculateAnswer();
+  const { toReviewResults } = useToReviewResults();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
 
@@ -59,6 +61,8 @@ const WaitingForQAsk = () => {
         userState,
         null
       )
+    } else if (status % 100 === 3) {
+      toReviewResults(5, answerState, userState, []);
     }
   };
 
@@ -69,16 +73,15 @@ const WaitingForQAsk = () => {
       <div className="explanation">
         <p className="title">オンリーワンゲーム　ルール説明</p>
         <p>
-          ① 答えがたくさんあるお題が出題されます。(全5問)<br />
-          <span className="notation">　　(例：都道府県→チュートリアルでやります)</span><br />
+          ① 答えがたくさんあるお題が出題されます。(全6問)<br />
+          <span className="notation">　　(例：都道府県)</span><br />
           ② 他人と<span className="emphasize">被らなさそうな回答</span>を考え提出します。<br />
           ③ 集計結果に応じて、ポイントをゲットします。<br />
-          ・<span className="emphasize">オンリーワンの回答：100pt</span><br />
-          ・<span className="emphasize">シス研1年目社員</span>と被ると<span className="emphasize">ボーナスポイント</span><br />
+          ・<span className="emphasize">オンリーワンの回答：満点</span><br />
+          ・<span className="emphasize">シス研1年目社員</span>と被ると<span className="emphasize">ボーナスポイント加算</span><br />
           ・被った人数が多いほどポイントダウン<br />
           <br />
-          【個人】 総合得点が最も高い人が優勝！<br />
-          【所属】 所属の平均点が最も高いグループが優勝！
+          獲得ポイントが最も高い人が<span className="emphasize">優勝！</span><br />
         </p>
       </div>
       <div className="enjoyPoint">
@@ -98,12 +101,14 @@ const WaitingForQAsk = () => {
           次へ進む ▶
         </button>
       </div>
-      {isModalOpen && (
-        <div className={`modalOverlay ${isFadingOut ? 'fadeOut' : ''}`} onClick={handleOutsideClick}>
-          <PleaseWaitModal onClose={handleCloseModal} />
-        </div>
-      )}
-    </div>
+      {
+        isModalOpen && (
+          <div className={`modalOverlay ${isFadingOut ? 'fadeOut' : ''}`} onClick={handleOutsideClick}>
+            <PleaseWaitModal onClose={handleCloseModal} />
+          </div>
+        )
+      }
+    </div >
   );
 };
 

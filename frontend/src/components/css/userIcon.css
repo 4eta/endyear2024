@@ -42,3 +42,21 @@
   position: relative;
   top: -8.7px;
 }
+
+.tooltip {
+  position: absolute;
+  top: -70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 0 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  text-align: center;
+  z-index: 10;
+}
+
+.tooltipDepartment {
+  font-size: 12px;
+}

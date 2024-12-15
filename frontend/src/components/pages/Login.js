@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useLogin } from '../hooks/useLogin';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -32,8 +32,12 @@ const Login = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(user);
-    login(user);
+    const isDepartmentValid = departmentList.some(dept => dept.label === user.department);
+    const isFirstNameValid = user.first_name.trim() !== '' && !/[\s\u3000]/.test(user.first_name);
+    const isLastNameValid = user.last_name.trim() !== '' && !/[\s\u3000]/.test(user.last_name);
+    if (isFirstNameValid && isLastNameValid && isDepartmentValid) {
+      login(user);
+    }
   };
 
   return (
@@ -54,7 +58,7 @@ const Login = () => {
                 onChange={handleInputChange}
                 required
               />
-              <TextField 
+              <TextField
                 id="first_name"
                 label="名前"
                 variant="outlined"
@@ -69,15 +73,15 @@ const Login = () => {
                 disablePortal
                 options={departmentList}
                 className="custom-dropdown"
-                renderInput={(params) => <TextField {...params} label="所属" />}
+                renderInput={(params) => <TextField {...params} label="チーム" />}
                 onChange={handleDepartmentChange}
                 required
               />
             </div>
-            <button 
-              type="submit" 
+            <button
+              type="submit"
               className="btn">
-                入室する
+              入室する
             </button>
           </form>
         </div>

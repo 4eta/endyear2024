@@ -214,6 +214,11 @@ const QResult = () => {
                         </tr>
                       )
                     ))}
+                    <tr>
+                      <td>
+                        <p className="seeMore" onClick={handleDetailModalClick}>結果詳細</p>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
             );
