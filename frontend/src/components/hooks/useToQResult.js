@@ -11,13 +11,13 @@ export const useToQResult = () => {
 
     try {
       const res = await axios.get(endpoint);
-      console.log(res.data);
+      // console.log(res.data);
       console.log("結果待機画面処理");
 
       return res.data.status;
     } catch (err) {
       console.log("結果待機画面処理に失敗しました。", err);
-      return 0; 
+      return 0;
     }
   };
 

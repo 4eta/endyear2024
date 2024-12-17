@@ -10,7 +10,7 @@ export const useToWaitingForQResult = () => {
 
         try {
             const res = await axios.get(endpoint);
-            console.log(res.data);
+            // console.log(res.data);
             console.log("問題待機画面へ進む処理");
 
             return res.data.status;

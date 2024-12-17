@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CircularProgress, Container, Alert } from '@mui/material';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import background from "../../img/backgroundimage1.jpg";
+import background from "../../img/backgroundimage2.png";
 import './Ranking.css';
 import DepartmentList from "../template/DepartmentList";
 
@@ -67,8 +67,6 @@ const Ranking = () => {
 
     // 上5人のみを取得
     const top5 = users.slice(0, 5);
-
-    // loadNo1Answer(top5[0].user_id);
 
     // 背景色を取得
     const getColorByDepartment = (department) => {

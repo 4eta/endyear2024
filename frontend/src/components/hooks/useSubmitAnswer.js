@@ -17,12 +17,10 @@ export const useSubmitAnswer = () => {
       content: answer
     };
 
-    console.log("データ", data);
-
     axios
       .post(endpoint, data)
       .then((res) => {
-        console.log("res.data", res.data);
+        // console.log("res.data", res.data);
 
         console.log("回答登録処理");
 

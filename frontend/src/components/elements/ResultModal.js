@@ -2,7 +2,9 @@ import React from 'react';
 import '../css/resultmodal.css';
 import UserIcon from './UserIcon';
 
-const ResultModal = ({ num, answerList }) => {
+const ResultModal = ({ answerList }) => {
+
+  const num = answerList.length;
   // UserIconをnumの数だけ生成
   const userIcons = Array.from({ length: num }, (_, index) => (
     <UserIcon key={index} user={answerList[index]} />
@@ -21,17 +23,24 @@ const ResultModal = ({ num, answerList }) => {
     <div className="resultModal" style={{ background: 'transparent', height: '100px', left: 'calc(50% - 171.5px)' }}>
       <div className="resultFrameModal">
         <table>
-          <tr>
-            <td className="rankModal">
-              <span style={{ fontSize: '20px', fontWeight: '700' }}>{answerList[0].rank}</span>位
-            </td>
-            <td className="answerModal">
-              {answerList[0].content}
-            </td>
-            <td className="pointModal">
-              <p><span style={{ fontSize: '16px', fontWeight: '700' }}>{answerList[0].score}</span>pt</p>
-            </td>
-          </tr>
+          <colgroup>
+            <col style={{ width: '60px' }} />
+            <col style={{ width: '223px' }} />
+            <col style={{ width: '60px' }} />
+          </colgroup>
+          <tbody>
+            <tr>
+              <td className="rankModal">
+                <span style={{ fontSize: '20px', fontWeight: '700' }}>{answerList[0].rank}</span>位
+              </td>
+              <td className="answerModal">
+                {answerList[0].content}
+              </td>
+              <td className="pointModal">
+                <p><span style={{ fontSize: '16px', fontWeight: '700' }}>{answerList[0].score}</span>pt</p>
+              </td>
+            </tr>
+          </tbody>
         </table>
       </div>
       <div className="resultUserFrameModal" style={{ height: `${frameHeight}px` }}>

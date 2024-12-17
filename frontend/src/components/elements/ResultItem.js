@@ -34,7 +34,8 @@ const ResultItem = ({ answerList, isMine }) => {
           <tbody>
             <tr>
               <td style={{ width: '60px', height: '46px' }}>
-                <div className="resultNumFrame" style={isMine ? { background: '#3bb9c1' } : answerList[0].user_id === null ? { background: '#bbbbbb' } : {}}>
+                {/* <div className="resultNumFrame" style={isMine ? { background: '#3bb9c1' } : answerList[0].user_id === null ? { background: '#bbbbbb' } : {}}> */}
+                <div className={`resultNumFrame${isMine ? ' isMine' : ''}${answerList.length === 1 ? ' is1st' : ''}`} style={answerList[0].user_id === null ? { background: '#bbbbbb' } : {}}>
                   <div className="onlyOneCrown">
                     <img
                       src={`${process.env.PUBLIC_URL}/crown.png`}
@@ -60,12 +61,14 @@ const ResultItem = ({ answerList, isMine }) => {
           </tbody>
         </table>
       </div>
-      {isModalOpen && (
-        <div className={`modalOverlay ${isFadingOut ? 'fadeOut' : ''}`} onClick={handleOutsideClick}>
-          <ResultModal onClose={handleCloseModal} num={answerList.length} answerList={answerList} />
-        </div>
-      )}
-    </div>
+      {
+        isModalOpen && (
+          <div className={`modalOverlay ${isFadingOut ? 'fadeOut' : ''}`} onClick={handleOutsideClick}>
+            <ResultModal onClose={handleCloseModal} num={answerList.length} answerList={answerList} />
+          </div>
+        )
+      }
+    </div >
   );
 };
 

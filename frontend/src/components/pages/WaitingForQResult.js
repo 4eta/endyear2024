@@ -31,7 +31,7 @@ const WaitingForQResult = () => {
   const location = useLocation();
   const { question_id, answerState, userState, resultList } = location.state;
 
-  console.log("WaitingForQResult.js");
+  // console.log("WaitingForQResult.js");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -72,14 +72,14 @@ const WaitingForQResult = () => {
 
   return (
     <div className="background">
-      <Header user={userState} />
+      <Header user={userState} question_id={question_id} resultFlag={false} />
 
       <div className="blur" style={{ height: '78px', top: '105px', position: 'absolute' }}>
         <button
           type="submit"
           className="btn"
           onClick={handleSubmit}>
-          次へ進む ▶
+          結果を見る ▶
         </button>
       </div>
       {isModalOpen && (

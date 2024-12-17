@@ -4,7 +4,7 @@ import '../css/resultdetail.css';
 import ResultItem from './ResultItem';
 import ResultModal from './ResultModal';
 
-const QResultDetailModal = ({ num, userState, answerState, resultList, onClose }) => {
+const QResultDetailModal = ({ userState, answerState, resultList, onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [animationClass, setAnimationClass] = useState('fadeIn');
 
@@ -25,8 +25,6 @@ const QResultDetailModal = ({ num, userState, answerState, resultList, onClose }
       handleCloseModal();
     }
   };
-
-  console.log("QResultDetailModal.js");
 
   return (
     <div className={`background ${animationClass}`}>

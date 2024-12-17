@@ -33,9 +33,9 @@ const WaitingForQAsk = () => {
   const navigate = useNavigate();
   const { answerState, userState } = location.state;
 
-  console.log("WaitingForQ.js");
-  console.log("answerState", answerState);
-  console.log("userState", userState);
+  // console.log("WaitingForQ.js");
+  // console.log("answerState", answerState);
+  // console.log("userState", userState);
 
 
   const handleSubmit = async (event) => {
@@ -68,7 +68,7 @@ const WaitingForQAsk = () => {
 
   return (
     <div className="background">
-      <Header user={userState} />
+      <Header user={userState} question_id={0} resultFlag={false} />
 
       <div className="explanation">
         <p className="title">オンリーワンゲーム　ルール説明</p>
@@ -98,7 +98,7 @@ const WaitingForQAsk = () => {
           type="submit"
           className="btn"
           onClick={handleSubmit}>
-          次へ進む ▶
+          出題画面へ ▶
         </button>
       </div>
       {

@@ -22,6 +22,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 import backend.crud.answer as crud
+import backend.crud.user as user_crud
 from backend.api.deps import get_db
 from backend.schemas.answer import Answer, AnswerCreate, AnswerDetail
 
@@ -48,7 +49,7 @@ def create_answer(answer: AnswerCreate, db: Session = Depends(get_db)):
     return crud.create_answer(db=db, answer=answer)
 
 
-@router.get("/answer/pair/all")
+@router.get("/answer/best_pair/all")
 def get_best_pairs(db: Session = Depends(get_db)):
     """
     Get the best answer pairs.
@@ -67,6 +68,22 @@ def get_best_pairs(db: Session = Depends(get_db)):
         tmp = [ans_pair0_content, ans_pair1_content]
         results.append(tmp)
     return [best_pairs, results]
+
+
+@router.get("/answer/best_newbie/all")
+def get_best_newbie(db: Session = Depends(get_db)):
+    """
+    Get the best newbie answer pairs.
+
+    Returns:
+    - **List[User]**: List of best newbies
+    """
+    best_trainees = crud.get_best_newbiew_trainee(db)
+    results = []
+    for idx in best_trainees:
+        user = user_crud.read_by_id(db, idx)
+        results.append(user)
+    return results
 
 
 @router.get("/answer/{answer_id}", response_model=Answer)

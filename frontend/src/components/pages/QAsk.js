@@ -98,14 +98,14 @@ const QAsk = () => {
     };
   }, []);
 
-  console.log("QAsk.js");
-  console.log("answerState", answerState);
-  console.log("userState", userState);
+  // console.log("QAsk.js");
+  // console.log("answerState", answerState);
+  // console.log("userState", userState);
 
 
   return (
     <div className="background">
-      <Header user={userState} />
+      <Header user={userState} question_id={question_id} resultFlag={false} />
 
       <div className={`qFrame ${isFocused ? 'inputMode' : ''}`}>
         <p className="qNumber">Q{question_id}</p>

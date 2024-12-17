@@ -16,7 +16,7 @@ export const useCalculateAnswer = () => {
       axios
         .get(answerEndpoint)
         .then((res) => {
-          console.log("res.data", res.data);
+          // console.log("res.data", res.data);
 
           console.log("回答集計処理");
 
@@ -24,7 +24,6 @@ export const useCalculateAnswer = () => {
           let content = null;
           let score = null;
           let rank = null;
-          let num = 0;
           let resultList = [];
           let tmp = [res.data[0]];
           let idxtmp = 0;
@@ -35,7 +34,6 @@ export const useCalculateAnswer = () => {
             content = res.data[0].content;
             score = res.data[0].score;
             rank = res.data[0].rank;
-            num++;
             idx = idxtmp;
           }
 
@@ -52,7 +50,6 @@ export const useCalculateAnswer = () => {
               content = res.data[i].content;
               score = res.data[i].score;
               rank = res.data[i].rank;
-              num++;
               idx = idxtmp;
             }
           }
@@ -78,18 +75,16 @@ export const useCalculateAnswer = () => {
             }
           }
 
-          console.log(resultList);
-
           const userEndpoint = getEndPoint(`user/${userState.user_id}`);
 
           axios
             .get(userEndpoint)
             .then((userRes) => {
-              console.log("userRes.data", userRes.data);
+              // console.log("userRes.data", userRes.data);
 
               console.log("ユーザー属性計算処理");
 
-              console.log(`TotalScore: ${userRes.data.total_score}, Rank: ${userRes.data.rank}`);
+              // console.log(`TotalScore: ${userRes.data.total_score}, Rank: ${userRes.data.rank}`);
 
               navigate(
                 "/QResult",
@@ -103,7 +98,6 @@ export const useCalculateAnswer = () => {
                       answer_id: answer_id,
                       score: score,
                       rank: rank,
-                      num: num,
                       idx: idx + zeroAnswerNum
                     },
                     userState: userRes.data,

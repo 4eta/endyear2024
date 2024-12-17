@@ -97,6 +97,17 @@ def read_users(db: Session = Depends(get_db)):
     return crud.read_all(db)
 
 
+@router.get("/user/total/worst", response_model=User)
+def read_worst_user(db: Session = Depends(get_db)):
+    """
+    Get the user with the lowest total score.
+
+    Returns:
+    - **User**: User with the lowest total score
+    """
+    return crud.read_worst_user(db)
+
+
 @router.put("/user/admin/{user_id}", response_model=User)
 def update_user_admin(user_id: int, is_admin: bool, db: Session = Depends(get_db)):
     """

@@ -3,7 +3,7 @@ import axios from 'axios';
 import { CircularProgress, Container, Alert } from '@mui/material';
 import { Chart as ChartJS, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import background from "../../img/backgroundimage1.jpg";
+import background from "../../img/backgroundimage2.png";
 import './Ranking.css';
 import DepartmentList from "../template/DepartmentList";
 
@@ -46,13 +46,16 @@ const Ranking = () => {
         if (!departmentScores[department]) {
             departmentScores[department] = { total_score: 0, count: 0 };
         }
-        departmentScores[department].total_score += user.total_score;
-        departmentScores[department].count += 1;
+        // total_scoreが0のuser(adminを含む)の結果は計上しない
+        if (user.total_score > 0) {
+            departmentScores[department].total_score += user.total_score;
+            departmentScores[department].count += 1;
+        }
     });
 
 
     // Calculate average scores for each department
-    const averageScores = Object.keys(departmentScores).map(department => {
+    const averageScoresOrigin = Object.keys(departmentScores).map(department => {
         const data = departmentScores[department];
         return {
             department: department,
@@ -60,10 +63,9 @@ const Ranking = () => {
         };
     });
 
-    console.log(averageScores);
-
-    // avarageScoresをavarageScores.avarage_scoreで降順にソート
-    averageScores.sort((a, b) => b.average_score - a.average_score);
+    // avarageScoresOriginをavarageScoresOrigin.avarage_scoreで降順にソート
+    averageScoresOrigin.sort((a, b) => b.average_score - a.average_score);
+    const averageScores = averageScoresOrigin.slice(0, 6);
 
     // 背景色を取得
     const getColorByDepartment = (department) => {
@@ -72,7 +74,7 @@ const Ranking = () => {
     };
 
     const getLengthOfChart = (total_score) => {
-        const percent = (total_score - averageScores[6].average_score) / (averageScores[0].average_score - averageScores[6].average_score) * 50 + 50;
+        const percent = (total_score - averageScores[5].average_score) / (averageScores[0].average_score - averageScores[5].average_score) * 50 + 50;
         return percent;
     };
 
@@ -99,7 +101,6 @@ const Ranking = () => {
                                     <div>4位</div>
                                     <div>5位</div>
                                     <div>6位</div>
-                                    <div>7位</div>
                                 </div>
                             </td>
                             <td>

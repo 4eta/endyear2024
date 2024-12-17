@@ -71,15 +71,15 @@ const ReviewResults = () => {
         }
     };
 
-    console.log("ReviewResults");
-    console.log("id", id);
-    console.log("answerStates", answerStates);
-    console.log("resultLists", resultLists);
+    // console.log("ReviewResults");
+    // console.log("id", id);
+    // console.log("answerStates", answerStates);
+    // console.log("resultLists", resultLists);
 
 
     return (
         <div className="background">
-            <Header user={userState} />
+            <Header user={userState} question_id={question_id} resultFlag={false} />
 
             <div className="qFrameResult">
                 <p className="qTitleResult">Q{id} {QuestionList[id].QTitle}</p>

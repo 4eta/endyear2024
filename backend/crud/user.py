@@ -40,6 +40,21 @@ def read_all(db: Session):
     return db.query(models.User).all()
 
 
+def read_worst_user(db: Session):
+    # 全ユーザーのなかで、全ての問題に回答済み、かつis_adminがFalseのユーザーの中で、最もスコアが低いユーザーを取得
+    users = db.query(models.User).order_by(models.User.total_score.asc()).all()
+    for user in users:
+        if user.is_admin:
+            continue
+        # 回答済みの問題数を取得
+        answered_questions = (
+            db.query(models.Answer).filter(models.Answer.user_id == user.user_id).all()
+        )
+        if len(answered_questions) == 6:
+            return user
+    return None
+
+
 # update
 def update_admin(db: Session, user_id: int, is_admin: bool):
     # user_idが一致するユーザーのis_adminを更新

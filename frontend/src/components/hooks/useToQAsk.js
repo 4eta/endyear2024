@@ -11,7 +11,7 @@ export const useToQAsk = () => {
 
     try {
       const res = await axios.get(endpoint);
-      console.log(res.data);
+      // console.log(res.data);
       console.log("出題待機画面処理");
 
       return res.data.status;

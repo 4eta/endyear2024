@@ -96,6 +96,47 @@ def get_best_pairs(db: Session):
     return best_pairs_user
 
 
+def get_best_newbiew_trainee(db: Session):
+    # is_adminと回答が被った回数が多い人を抽出
+    cnt = [0] * 300
+    for question_id in range(6):
+        answers_detail = (
+            db.query(
+                models.Answer,
+                models.Answer.user_id,
+                models.User.last_name,
+                models.User.first_name,
+                models.User.department,
+                models.User.is_admin,
+                models.Answer.answer_id,
+                models.Answer.question_id,
+                models.Answer.content,
+                models.Answer.score,
+                models.Answer.rank,
+            )
+            .join(models.User, models.Answer.user_id == models.User.user_id)
+            .filter(models.Answer.question_id == question_id)
+        )
+        # 各answer/contentごとに、is_adminがTrueのユーザーが存在するか辞書で保持
+        with_admin = defaultdict(bool)
+        for answer in answers_detail:
+            with_admin[answer.content] = with_admin[answer.content] or answer.is_admin
+        # 各answerごとにwith_adminがtrueの回答をしているuser_idについて、cntをインクリメント
+        for answer in answers_detail:
+            if with_admin[answer.content] and not answer.is_admin:
+                cnt[answer.user_id] += 1
+
+    max_cnt = 0
+    best_newbies = []
+    for i in range(300):
+        if cnt[i] > max_cnt:
+            max_cnt = cnt[i]
+            best_newbies = [i]
+        elif cnt[i] == max_cnt:
+            best_newbies.append(i)
+    return best_newbies
+
+
 def read_all(db: Session):
     # 全てのAnswerを取得
     return db.query(models.Answer).all()

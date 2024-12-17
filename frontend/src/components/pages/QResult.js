@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../css/common.css';
 import '../css/result.css';
@@ -25,6 +25,14 @@ const QResult = () => {
   const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
   const [isPWModalOpen, setIsPWModalOpen] = useState(false);
   const [isFadingOut, setIsFadingOut] = useState(false);
+  const [myAnswerList, setMyAnswerList] = useState([]);
+
+  useEffect(() => {
+    const myAnswers = resultList.find(result => result[0].content === answerState.content);
+    if (myAnswers) {
+      setMyAnswerList(myAnswers);
+    }
+  }, [resultList, answerState.content]);
 
   const handleMyFrameClick = () => {
     setIsModalOpen(true);
@@ -96,7 +104,6 @@ const QResult = () => {
           answer_id: null,
           score: null,
           rank: null,
-          num: null,
           idx: 0,
         },
         userState,
@@ -105,14 +112,15 @@ const QResult = () => {
     }
   };
 
-  console.log("QResult.js");
-  console.log("answerState", answerState);
-  console.log("userState", userState);
-  console.log("resultList", resultList);
+  // console.log("QResult.js");
+  // console.log("answerState", answerState);
+  // console.log("userState", userState);
+  // console.log("resultList", resultList);
+  // console.log("myAnswerList", myAnswerList);
 
   return (
     <div className="background">
-      <Header user={userState} />
+      <Header user={userState} question_id={question_id} resultFlag={true} />
 
       <div className="qFrameResult">
         <p className="qTitleResult">Q{question_id} {QuestionList[question_id].QTitle}</p>
@@ -133,7 +141,7 @@ const QResult = () => {
 
         <p className="myRank">
           <span style={{ fontSize: '32px', fontWeight: '400' }}>{answerState.rank !== null ? answerState.rank : '-- '}</span><span style={{ fontSize: '16px', fontWeight: '700' }}>位</span><br />
-          回答者 <span style={{ fontSize: '14px', fontWeight: '700' }}>{answerState.num !== 0 ? answerState.num : '--'}</span>人
+          回答者 <span style={{ fontSize: '14px', fontWeight: '700' }}>{myAnswerList.length !== 0 ? myAnswerList.length : '--'}</span>人
         </p>
 
         <div className="icons">
@@ -142,17 +150,14 @@ const QResult = () => {
           </div>
           <div className="otherIcon">
             <div className="userIconContainer">
-              {resultList.map((result) => (
-                result[0].content === answerState.content ? (
-                  result.slice(0, 4).map((ans) => (
-                    ans.user_id === userState.user_id ? null :
-                      <UserIcon key={ans.user_id} user={{
-                        first_name: ans.first_name,
-                        last_name: ans.last_name,
-                        department: ans.department
-                      }} />
-                  ))
-                ) : null
+              {myAnswerList.slice(0, 4).map((ans) => (
+                ans.user_id === userState.user_id ? null :
+                  <UserIcon key={ans.user_id} user={{
+                    first_name: ans.first_name,
+                    last_name: ans.last_name,
+                    department: ans.department,
+                    is_admin: ans.is_admin
+                  }} />
               ))}
             </div>
           </div>
@@ -227,12 +232,12 @@ const QResult = () => {
       </div>
       {isModalOpen && (
         <div className="modalOverlay" onClick={handleOutsideClick}>
-          <ResultModal onClose={handleCloseModal} num={answerState.num} answerList={resultList[answerState.idx]} />
+          <ResultModal onClose={handleCloseModal} answerList={resultList[answerState.idx]} />
         </div>
       )}
       {isDetailModalOpen && (
         <div className="modalOverlayDetail" onClick={handleDetailOutsideClick}>
-          <QResultDetailModal onClose={handleDetailCloseModal} num={answerState.num} userState={userState} answerState={answerState} resultList={resultList} />
+          <QResultDetailModal onClose={handleDetailCloseModal} userState={userState} answerState={answerState} resultList={resultList} />
         </div>
       )}
       {isPWModalOpen && (

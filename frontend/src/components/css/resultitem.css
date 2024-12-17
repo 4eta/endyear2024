@@ -24,12 +24,23 @@
 }
 
 .resultNumFrame {
-    background: linear-gradient(to bottom, red, blue);
+    /* background: linear-gradient(to bottom, red, blue); */
+    background: linear-gradient(to bottom, #7e44db, #27035f);
     width: 60px;
     height: 46px;
     border-radius: 23px 0 0 23px;
     position: relative;
 }
+
+.is1st {
+    background: linear-gradient(to bottom, #fadb84, #493809);
+}
+
+.isMine {
+    background: linear-gradient(to bottom, #65e8f1, #0b555a);
+}
+
+
 
 .onlyOneCrown img {
     width: 10px;
