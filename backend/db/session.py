@@ -7,7 +7,13 @@ from backend.core.config import settings
 # エンジンを作成する関数を定義
 def get_engine(db_url):
     if "sqlite" in db_url:
-        return create_engine(db_url, connect_args={"check_same_thread": False})
+        return create_engine(
+            db_url,
+            pool_size=0,
+            max_overflow=-1,
+            pool_timeout=30,
+            connect_args={"check_same_thread": False},
+        )
     return create_engine(db_url)
 
 

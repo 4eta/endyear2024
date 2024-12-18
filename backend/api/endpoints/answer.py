@@ -58,16 +58,19 @@ def get_best_pairs(db: Session = Depends(get_db)):
     - **List[AnswerDetail]**: List of best answer pairs for each question
     """
     best_pairs = crud.get_best_pairs(db)
-    results = []
+    max_score = 0
+    max_pairs = (None, None)
     for pair in best_pairs:
-        ans_pair0 = crud.read_by_user_id(db, pair[0].user_id)
-        ans_pair1 = crud.read_by_user_id(db, pair[1].user_id)
-        tmp = []
-        ans_pair0_content = [ans.content for ans in ans_pair0]
-        ans_pair1_content = [ans.content for ans in ans_pair1]
-        tmp = [ans_pair0_content, ans_pair1_content]
-        results.append(tmp)
-    return [best_pairs, results]
+        user1 = user_crud.read_by_id(db, pair[0].user_id)
+        user2 = user_crud.read_by_id(db, pair[1].user_id)
+        if user1.total_score + user2.total_score > max_score:
+            max_score = user1.total_score + user2.total_score
+            max_pairs = (user1, user2)
+    ans_log1 = crud.read_by_user_id(db, max_pairs[0].user_id)
+    ans_log2 = crud.read_by_user_id(db, max_pairs[1].user_id)
+    ans_content1 = [ans.content for ans in ans_log1]
+    ans_content2 = [ans.content for ans in ans_log2]
+    return [max_pairs, ans_content1, ans_content2]
 
 
 @router.get("/answer/best_newbie/all")
@@ -76,14 +79,17 @@ def get_best_newbie(db: Session = Depends(get_db)):
     Get the best newbie answer pairs.
 
     Returns:
-    - **List[User]**: List of best newbies
+    - **User**: Best newbie user
     """
     best_trainees = crud.get_best_newbiew_trainee(db)
-    results = []
+    max_score = 0
+    max_user = None
     for idx in best_trainees:
         user = user_crud.read_by_id(db, idx)
-        results.append(user)
-    return results
+        if user.total_score > max_score:
+            max_score = user.total_score
+            max_user = user
+    return max_user
 
 
 @router.get("/answer/{answer_id}", response_model=Answer)
